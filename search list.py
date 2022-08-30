@@ -46,6 +46,12 @@ def filter_out_one(item_list, item_name_long):
 item_list = []
 item_name_list = list(mydict.keys())
 
+print('Enter Estimate no : ')
+estimate_no = str(input())
+file_name = f'E-{estimate_no}.txt'
+file_object = open(file_name,'w')
+file_object.write(f'{" "*10}{file_name[:-4]}\n\n{"-"*40}\n\n')
+
 while True:
     
     print('Enter item name : ')
@@ -81,7 +87,15 @@ for data in result:
     # print(data)
     for item in data:
         print(item)
+        file_object.write(f'{str(item)}\n')
     bale_sum = sum_of_list_of_item_field(data)
     print('Bale Sum : ' + str(bale_sum))
+    file_object.write(f'Bale Sum : {str(bale_sum)}\n')
+
+    print('-'*40)
+    file_object.write(f'{"-"*40}'
+                      f'\n')
+    file_object.write('\n')
     print()
     
+file_object.close()
