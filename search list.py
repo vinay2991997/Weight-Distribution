@@ -23,6 +23,26 @@ def find_item(item_list,item_name):
         return None
 
 
+def filter_list(item_list, item_name):
+    filtered_list = []
+    for item in item_list:
+        if item.find(item_name.upper()) != -1:
+            filtered_list.append(item)
+    
+    return filtered_list
+
+
+def filter_out_one(item_list, item_name_long):
+    local_list = item_list
+    item_name_long_segregated_list = item_name_long.split(' ')
+    for item_to_be_searched in item_name_long_segregated_list:
+        local_list = filter_list(local_list,item_to_be_searched)
+
+    if len(local_list) == 1:
+        return local_list[0]
+    else:
+        return None
+
 item_list = []
 item_name_list = list(mydict.keys())
 
@@ -34,7 +54,7 @@ while True:
     if item_name == '--':
         break
 
-    actual_item_name = find_item(item_name_list, item_name)
+    actual_item_name = filter_out_one(item_name_list, item_name)
 
     if actual_item_name is not None :
         print('Enter Quantity : ')
@@ -42,6 +62,9 @@ while True:
 
         item = item_field(actual_item_name,quantity,mydict[actual_item_name])
         item_list.append(item)
+    
+    else:
+        print('\nPLEASE re-enter item name correctly!!\n'.upper())
     
 result = []
 weight_distribution(item_list,result)
