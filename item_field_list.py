@@ -1,13 +1,12 @@
 class Item_field_list:
     
-    item_fields = []
     
-    def __init__(self, item_fields=[]) -> None:
+    def __init__(self, item_fields:list) -> None:
         self.item_fields = item_fields
         pass
     
     def add_item(self, item_field):
-        self.append(item_field)
+        self.item_fields.append(item_field)
         
     def __iter__(self):
         return self.item_fields
@@ -20,10 +19,10 @@ class Item_field_list:
         return sum([item_field.total_weight for item_field in self.item_fields])
     
     def filter(self, item_name):
-        filtered_list = Item_field_list()
-        for item in self.item_fields:
-            if item.upper().find(item_name.upper()) != -1:
-                filtered_list.item_fields.append(item)
+        filtered_list = Item_field_list([])
+        for item_field in self.item_fields:
+            if item_field.name.upper().find(item_name.upper()) != -1:
+                filtered_list.item_fields.append(item_field)
     
         return filtered_list
     
@@ -33,8 +32,8 @@ class Item_field_list:
         for item_to_be_searched in item_name_long_segregated_list:
             local_list = local_list.filter(item_to_be_searched)
 
-        if len(local_list) == 1:
-            return local_list[0]
+        if local_list.get_length() == 1:
+            return local_list.item_fields[0]
         else:
             return None
     
