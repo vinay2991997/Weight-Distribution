@@ -1,7 +1,7 @@
 class Item_field_list:
     
-    
-    def __init__(self, item_fields:list) -> None:
+    item_fields = []
+    def __init__(self, item_fields) -> None:
         self.item_fields = item_fields
         pass
     
@@ -9,7 +9,7 @@ class Item_field_list:
         self.item_fields.append(item_field)
         
     def __iter__(self):
-        return self.item_fields
+        return iter(self.item_fields)
     
     def add_item_list(self, item_field_list):
         for item in item_field_list:

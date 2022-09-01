@@ -2,6 +2,8 @@
 from math import ceil, floor
 import random
 
+from item_field_list import Item_field_list
+
 
 def weight_distribution_for_one(item_list, total_sum_needed, data, variance=2):
 
@@ -14,20 +16,21 @@ def weight_distribution_for_one(item_list, total_sum_needed, data, variance=2):
         item_list[1:], total_sum_needed-item_list[0].total_weight, data, variance)
 
     if result:
-        data.append(item_list[0])
+        data.add_item(item_list[0])
         return True
 
     else:
         return weight_distribution_for_one(item_list[1:], total_sum_needed, data, variance)
 
 
-def weight_distribution_helper(item_list, result, total_sum_needed=[], variance=2):
-    local_weight_list = list(item_list)
+def weight_distribution_helper(item_list:Item_field_list, result, total_sum_needed=[], variance=2):
+    local_weight_list = list(item_list.item_fields)
     random.shuffle(local_weight_list)
 
     for weight_needed in total_sum_needed:
 
-        data = []
+        # data = []
+        data = Item_field_list([])
         if not (weight_distribution_for_one(local_weight_list, weight_needed, data, variance)):
             result.clear()
             return False
@@ -43,11 +46,12 @@ def weight_distribution_helper(item_list, result, total_sum_needed=[], variance=
     return True
 
 
-def weight_distribution(item_list, result, total_sum_needed_list=[]):
+def weight_distribution(item_list:Item_field_list, result, total_sum_needed_list=[]):
 
     max_weight_of_single_bale = 83
 
     total_sum_of_weight = sum([item.total_weight for item in item_list])
+    # total_sum_of_weight = item_list.sum_of_total_weights()
     no_of_bales = ceil(total_sum_of_weight/max_weight_of_single_bale)
     total_sum_needed = ceil(total_sum_of_weight/no_of_bales)
 
