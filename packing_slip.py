@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 
 
 class Packing_slip:
@@ -8,7 +9,18 @@ class Packing_slip:
         self.bale_list = bale_list
         self.no_of_bales = len(bale_list)
         self.date_time = datetime.now()
-        
+      
+    def generate_file(self):
+        folder_name = "Estimate"
+        try:
+            os.makedirs(folder_name)
+        except:
+            pass
+        file_name = self.estimate_no + '.txt'
+        file_object = open(f'{folder_name}/{file_name}',"w")
+        file_object.write(str(self))
+        file_object.close()
+      
     def __repr__(self) -> str:
         data_str = []
         data_str.append(f'\n{" "*8} PACKING SLIP')
