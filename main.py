@@ -36,7 +36,7 @@ while True:
     
 
 while True:
-    estimate.make_packing_slip()
+    estimate.prepare_packing_slip()
     print(estimate)
     
     print('Reshuffle Packing List (y/n) : ')

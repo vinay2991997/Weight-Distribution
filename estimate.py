@@ -6,12 +6,13 @@ from weight_distribution import weight_distribution
 
 class Estimate:
     def __init__(self, estimate_no) -> None:
+        self.id = estimate_no
         self.estimate_no = f'E-{int(estimate_no)}'
         self.date_time = datetime.now()
         self.item_field_list = Item_field_list([])
         self.packing_slip = Packing_slip(self.estimate_no,[])
     
-    def make_packing_slip(self):
+    def prepare_packing_slip(self):
         self.packing_slip = Packing_slip(self.estimate_no,[])
         weight_distribution(self.item_field_list,self.packing_slip.bale_list)
     
