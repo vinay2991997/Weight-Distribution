@@ -11,9 +11,9 @@ estimate = Estimate(estimate_no)
 
 mydict = read_csv_file()
 
-csv_item_field = Item_field_list([])
+csv_item_field_list = Item_field_list([])
 for key,value in mydict.items():
-    csv_item_field.add_item(Item_field(key,0,value))
+    csv_item_field_list.add_item(Item_field(key,0,value))
 
 while True:
     print('Enter item name : ')
@@ -22,7 +22,7 @@ while True:
     if item_name == '--':
         break
 
-    actual_item = csv_item_field.filter_out_one(item_name)
+    actual_item = csv_item_field_list.filter_out_one(item_name)
 
     if actual_item is not None :
         print('Enter Quantity : ')
@@ -35,10 +35,14 @@ while True:
         print('\nPLEASE re-enter item name correctly!!\n'.upper())
     
 
-
-estimate.make_packing_slip()
-
-print(estimate)
+while True:
+    estimate.make_packing_slip()
+    print(estimate)
+    
+    print('Reshuffle Packing List (y/n) : ')
+    reply = str(input())
+    if (reply.upper() != 'Y'):
+        break
 
 # print(estimate.packing_slip)
 ## get list of items from file

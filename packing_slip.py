@@ -12,7 +12,7 @@ class Packing_slip:
     def __repr__(self) -> str:
         data_str = []
         data_str.append(f'\n{" "*8} PACKING SLIP')
-        data_str.append(f'  {self.estimate_no} {" "*10} {self.date_time.date()}')
+        data_str.append(f'  {self.estimate_no} {" "*10} {self.date_time.date()} {self.date_time.time()}')
         for item_field_list in self.bale_list:
             data_str.append('-'*40)
             data_str.append(str(item_field_list))

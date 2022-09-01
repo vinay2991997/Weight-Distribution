@@ -12,6 +12,7 @@ class Estimate:
         self.packing_slip = Packing_slip(self.estimate_no,[])
     
     def make_packing_slip(self):
+        self.packing_slip = Packing_slip(self.estimate_no,[])
         weight_distribution(self.item_field_list,self.packing_slip.bale_list)
     
     def get_number_of_items(self):
